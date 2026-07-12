@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Company Profile Clone</title>
     <link rel="stylesheet" href="styles.css">
-    <!-- Using Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
@@ -13,10 +12,10 @@
         <div class="container">
             <div class="logo">ZoomInfoClone</div>
             <div class="search-bar">
-                <input type="text" placeholder="Search for companies, contacts, etc.">
-                <button><i class="fas fa-search"></i></button>
+                <input type="search" placeholder="Search for companies, contacts, etc." aria-label="Search companies and contacts" autocomplete="off" maxlength="255" enterkeyhint="search">
+                <button type="button" aria-label="Search"><i class="fas fa-search" aria-hidden="true"></i></button>
             </div>
-            <nav class="header-nav">
+            <nav class="header-nav" aria-label="Main navigation">
                 <a href="#">Products</a>
                 <a href="#">Solutions</a>
                 <a href="#">Pricing</a>
@@ -25,26 +24,30 @@
         </div>
     </header>
 
-    <div class="breadcrumbs container">
-        <a href="#">Home</a> > <a href="#">Companies</a> > <span>Amazon</span>
-    </div>
+    <nav class="breadcrumbs container" aria-label="Breadcrumb">
+        <a href="#">Home</a>
+        <span aria-hidden="true">&gt;</span>
+        <a href="#">Companies</a>
+        <span aria-hidden="true">&gt;</span>
+        <span>Amazon</span>
+    </nav>
 
     <main class="container page-content">
-        <!-- Main Content (Left Column) -->
         <div class="main-column">
-            
             <section class="hero-section card">
                 <div class="hero-header">
                     <div class="company-logo-large">
-                        <img src="https://logo.clearbit.com/amazon.com" alt="Amazon Logo" onerror="this.src='https://via.placeholder.com/100'">
+                        <object data="https://logo.clearbit.com/amazon.com" type="image/png" role="img" aria-label="Amazon logo">
+                            <img src="https://via.placeholder.com/100" alt="Amazon logo">
+                        </object>
                     </div>
                     <div class="company-title-area">
                         <h1>Amazon</h1>
-                        <a href="https://www.amazon.com" class="company-website" target="_blank"><i class="fas fa-link"></i> www.amazon.com</a>
+                        <a href="https://www.amazon.com" class="company-website" target="_blank" rel="noopener noreferrer nofollow"><i class="fas fa-link" aria-hidden="true"></i> www.amazon.com</a>
                         <div class="social-links">
-                            <a href="#"><i class="fab fa-linkedin"></i></a>
-                            <a href="#"><i class="fab fa-twitter"></i></a>
-                            <a href="#"><i class="fab fa-facebook"></i></a>
+                            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin" aria-hidden="true"></i></a>
+                            <a href="#" aria-label="Twitter"><i class="fab fa-twitter" aria-hidden="true"></i></a>
+                            <a href="#" aria-label="Facebook"><i class="fab fa-facebook" aria-hidden="true"></i></a>
                         </div>
                     </div>
                 </div>
@@ -72,26 +75,26 @@
                 <h2>About Amazon</h2>
                 <div class="about-content">
                     <p class="description-text">
-                        Amazon is a leading global technology company specializing in e-commerce, cloud computing, digital streaming, and artificial intelligence. 
+                        Amazon is a leading global technology company specializing in e-commerce, cloud computing, digital streaming, and artificial intelligence.
                         <span class="more-text">
-                            Founded in a garage, it has grown to become one of the most influential economic and cultural forces in the world. 
-                            Our mission is to continually innovate and provide unparalleled services and products to our global customer base. 
+                            Founded in a garage, it has grown to become one of the most influential economic and cultural forces in the world.
+                            Our mission is to continually innovate and provide unparalleled services and products to our global customer base.
                             We strive to be Earth's most customer-centric company, where people can find and discover anything they want to buy online.
                         </span>
                     </p>
-                    <button class="read-more-btn">Read More <i class="fas fa-chevron-down"></i></button>
+                    <button type="button" class="read-more-btn">Read More <i class="fas fa-chevron-down" aria-hidden="true"></i></button>
                 </div>
             </section>
 
             <section class="contacts-section card">
                 <h2>Key Contacts</h2>
-                <div class="tabs">
-                    <button class="tab-btn active" data-target="executives">Executives</button>
-                    <button class="tab-btn" data-target="it">IT & Engineering</button>
-                    <button class="tab-btn" data-target="marketing">Marketing</button>
+                <div class="tabs" role="tablist">
+                    <button type="button" class="tab-btn active" data-target="executives" role="tab" aria-selected="true">Executives</button>
+                    <button type="button" class="tab-btn" data-target="it" role="tab" aria-selected="false">IT & Engineering</button>
+                    <button type="button" class="tab-btn" data-target="marketing" role="tab" aria-selected="false">Marketing</button>
                 </div>
-                
-                <div class="tab-content active" id="executives">
+
+                <div class="tab-content active" id="executives" role="tabpanel">
                     <div class="contact-card">
                         <div class="contact-avatar">JS</div>
                         <div class="contact-info">
@@ -109,7 +112,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="tab-content" id="it">
+                <div class="tab-content" id="it" role="tabpanel">
                     <div class="contact-card">
                         <div class="contact-avatar">MK</div>
                         <div class="contact-info">
@@ -119,7 +122,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="tab-content" id="marketing">
+                <div class="tab-content" id="marketing" role="tabpanel">
                     <div class="contact-card">
                         <div class="contact-avatar">AL</div>
                         <div class="contact-info">
@@ -143,23 +146,21 @@
                     <span class="tech-tag">MySQL</span>
                 </div>
             </section>
-
         </div>
 
-        <!-- Sidebar (Right Column) -->
         <aside class="sidebar">
             <div class="sticky-sidebar">
                 <section class="contact-details card">
                     <h2>Contact Info</h2>
                     <div class="contact-item">
-                        <i class="fas fa-phone"></i>
+                        <i class="fas fa-phone" aria-hidden="true"></i>
                         <div>
                             <strong>Main Phone</strong>
                             <p>(206) 266-1000</p>
                         </div>
                     </div>
                     <div class="contact-item">
-                        <i class="fas fa-map-marker-alt"></i>
+                        <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
                         <div>
                             <strong>Headquarters</strong>
                             <p>410 Terry Ave N<br>Seattle, Washington 98109<br>United States</p>
@@ -176,19 +177,19 @@
                         <li><strong>NAICS Code:</strong> 454110</li>
                     </ul>
                 </section>
-                
+
                 <section class="similar-companies card">
                     <h2>Similar Companies</h2>
                     <ul class="similar-list">
                         <li>
-                            <img src="https://via.placeholder.com/30" alt="Logo">
+                            <img src="https://via.placeholder.com/30" alt="CloudNet logo">
                             <div class="similar-info">
                                 <a href="#">CloudNet</a>
                                 <span>Software • $1B Rev</span>
                             </div>
                         </li>
                         <li>
-                            <img src="https://via.placeholder.com/30" alt="Logo">
+                            <img src="https://via.placeholder.com/30" alt="DataStream AI logo">
                             <div class="similar-info">
                                 <a href="#">DataStream AI</a>
                                 <span>Software • $800M Rev</span>
