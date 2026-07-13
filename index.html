@@ -3,20 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="ZoomInfoClone company profile for Amazon - revenue, employees, key contacts, technology stack, and similar companies.">
     <title>Company Profile Clone</title>
+
+    <!-- Preconnect to external asset origins to reduce DNS/TCP/TLS overhead. -->
+    <link rel="preconnect" href="https://logo.clearbit.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+
     <link rel="stylesheet" href="styles.css">
-    <!-- Using Font Awesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Font Awesome icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
 </head>
 <body>
+    <!-- Skip link for keyboard users -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Site header with branding, search, and primary navigation. -->
     <header class="site-header">
         <div class="container">
             <div class="logo">ZoomInfoClone</div>
-            <div class="search-bar">
-                <input type="text" placeholder="Search for companies, contacts, etc.">
-                <button><i class="fas fa-search"></i></button>
+            <div class="search-bar" role="search">
+                <label for="global-search" class="visually-hidden">Search for companies, contacts, etc.</label>
+                <input id="global-search" type="text" placeholder="Search for companies, contacts, etc.">
+                <button aria-label="Submit search"><i class="fas fa-search" aria-hidden="true"></i></button>
             </div>
-            <nav class="header-nav">
+            <nav class="header-nav" aria-label="Primary">
                 <a href="#">Products</a>
                 <a href="#">Solutions</a>
                 <a href="#">Pricing</a>
@@ -25,26 +36,33 @@
         </div>
     </header>
 
-    <div class="breadcrumbs container">
-        <a href="#">Home</a> > <a href="#">Companies</a> > <span>Amazon</span>
-    </div>
+    <!-- Breadcrumb navigation showing the current page location. -->
+    <nav class="breadcrumbs container" aria-label="Breadcrumb">
+        <a href="#">Home</a> &gt; <a href="#">Companies</a> &gt; <span aria-current="page">Amazon</span>
+    </nav>
 
-    <main class="container page-content">
-        <!-- Main Content (Left Column) -->
+    <!-- Main page content: company profile (left column) and supporting sidebar (right column). -->
+    <main id="main-content" class="container page-content">
         <div class="main-column">
-            
-            <section class="hero-section card">
+            <!-- Hero card: identity, website, social links, and top-level stats. -->
+            <section class="hero-section card" aria-label="Company overview">
                 <div class="hero-header">
                     <div class="company-logo-large">
-                        <img src="https://logo.clearbit.com/amazon.com" alt="Amazon Logo" onerror="this.src='https://via.placeholder.com/100'">
+                        <img src="https://logo.clearbit.com/amazon.com"
+                             alt="Amazon Logo"
+                             width="100" height="100"
+                             decoding="async"
+                             data-fallback="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23e5e7eb'/%3E%3C/svg%3E">
                     </div>
                     <div class="company-title-area">
                         <h1>Amazon</h1>
-                        <a href="https://www.amazon.com" class="company-website" target="_blank"><i class="fas fa-link"></i> www.amazon.com</a>
-                        <div class="social-links">
-                            <a href="#"><i class="fab fa-linkedin"></i></a>
-                            <a href="#"><i class="fab fa-twitter"></i></a>
-                            <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="https://www.amazon.com" class="company-website" target="_blank" rel="noopener noreferrer">
+                            <i class="fas fa-link" aria-hidden="true"></i> www.amazon.com
+                        </a>
+                        <div class="social-links" aria-label="Social media links">
+                            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin" aria-hidden="true"></i></a>
+                            <a href="#" aria-label="Twitter"><i class="fab fa-twitter" aria-hidden="true"></i></a>
+                            <a href="#" aria-label="Facebook"><i class="fab fa-facebook" aria-hidden="true"></i></a>
                         </div>
                     </div>
                 </div>
@@ -68,98 +86,59 @@
                 </div>
             </section>
 
-            <section class="about-section card">
+            <!-- About section with expandable long-form description. -->
+            <section class="about-section card" aria-label="About Amazon">
                 <h2>About Amazon</h2>
                 <div class="about-content">
                     <p class="description-text">
-                        Amazon is a leading global technology company specializing in e-commerce, cloud computing, digital streaming, and artificial intelligence. 
+                        Amazon is a leading global technology company specializing in e-commerce, cloud computing, digital streaming, and artificial intelligence.
                         <span class="more-text">
-                            Founded in a garage, it has grown to become one of the most influential economic and cultural forces in the world. 
-                            Our mission is to continually innovate and provide unparalleled services and products to our global customer base. 
+                            Founded in a garage, it has grown to become one of the most influential economic and cultural forces in the world.
+                            Our mission is to continually innovate and provide unparalleled services and products to our global customer base.
                             We strive to be Earth's most customer-centric company, where people can find and discover anything they want to buy online.
                         </span>
                     </p>
-                    <button class="read-more-btn">Read More <i class="fas fa-chevron-down"></i></button>
+                    <button class="read-more-btn" aria-expanded="false" aria-controls="about-more-text">
+                        Read More <i class="fas fa-chevron-down" aria-hidden="true"></i>
+                    </button>
                 </div>
             </section>
 
-            <section class="contacts-section card">
+            <!-- Key contacts section with tabbed department panels. -->
+            <section class="contacts-section card" aria-label="Key Contacts">
                 <h2>Key Contacts</h2>
-                <div class="tabs">
-                    <button class="tab-btn active" data-target="executives">Executives</button>
-                    <button class="tab-btn" data-target="it">IT & Engineering</button>
-                    <button class="tab-btn" data-target="marketing">Marketing</button>
+                <div class="tabs" role="tablist" aria-label="Contact departments">
+                    <button class="tab-btn active" role="tab" aria-selected="true" aria-controls="executives" id="tab-executives" data-target="executives">Executives</button>
+                    <button class="tab-btn" role="tab" aria-selected="false" aria-controls="it" id="tab-it" data-target="it" tabindex="-1">IT &amp; Engineering</button>
+                    <button class="tab-btn" role="tab" aria-selected="false" aria-controls="marketing" id="tab-marketing" data-target="marketing" tabindex="-1">Marketing</button>
                 </div>
-                
-                <div class="tab-content active" id="executives">
-                    <div class="contact-card">
-                        <div class="contact-avatar">JS</div>
-                        <div class="contact-info">
-                            <h3>Jane Smith</h3>
-                            <p>Chief Executive Officer (CEO)</p>
-                            <a href="#" class="view-contact">View Email & Phone</a>
-                        </div>
-                    </div>
-                    <div class="contact-card">
-                        <div class="contact-avatar">JD</div>
-                        <div class="contact-info">
-                            <h3>John Doe</h3>
-                            <p>Chief Financial Officer (CFO)</p>
-                            <a href="#" class="view-contact">View Email & Phone</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="tab-content" id="it">
-                    <div class="contact-card">
-                        <div class="contact-avatar">MK</div>
-                        <div class="contact-info">
-                            <h3>Mike Kowalski</h3>
-                            <p>VP of Engineering</p>
-                            <a href="#" class="view-contact">View Email & Phone</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="tab-content" id="marketing">
-                    <div class="contact-card">
-                        <div class="contact-avatar">AL</div>
-                        <div class="contact-info">
-                            <h3>Anna Lee</h3>
-                            <p>Chief Marketing Officer</p>
-                            <a href="#" class="view-contact">View Email & Phone</a>
-                        </div>
-                    </div>
-                </div>
+
+                <div class="tab-content active" id="executives" role="tabpanel" aria-labelledby="tab-executives"></div>
+                <div class="tab-content" id="it" role="tabpanel" aria-labelledby="tab-it" hidden></div>
+                <div class="tab-content" id="marketing" role="tabpanel" aria-labelledby="tab-marketing" hidden></div>
             </section>
 
-            <section class="tech-stack-section card">
+            <!-- Technology tags section, populated dynamically from a reusable data list. -->
+            <section class="tech-stack-section card" aria-label="Technologies used">
                 <h2>Technologies Used</h2>
-                <div class="tech-tags">
-                    <span class="tech-tag">AWS</span>
-                    <span class="tech-tag">React</span>
-                    <span class="tech-tag">Node.js</span>
-                    <span class="tech-tag">Python</span>
-                    <span class="tech-tag">Docker</span>
-                    <span class="tech-tag">Kubernetes</span>
-                    <span class="tech-tag">MySQL</span>
-                </div>
+                <div class="tech-tags"></div>
             </section>
-
         </div>
 
-        <!-- Sidebar (Right Column) -->
+        <!-- Supporting sidebar content that sticks on larger viewports. -->
         <aside class="sidebar">
             <div class="sticky-sidebar">
-                <section class="contact-details card">
+                <section class="contact-details card" aria-label="Contact information">
                     <h2>Contact Info</h2>
                     <div class="contact-item">
-                        <i class="fas fa-phone"></i>
+                        <i class="fas fa-phone" aria-hidden="true"></i>
                         <div>
                             <strong>Main Phone</strong>
                             <p>(206) 266-1000</p>
                         </div>
                     </div>
                     <div class="contact-item">
-                        <i class="fas fa-map-marker-alt"></i>
+                        <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
                         <div>
                             <strong>Headquarters</strong>
                             <p>410 Terry Ave N<br>Seattle, Washington 98109<br>United States</p>
@@ -167,7 +146,7 @@
                     </div>
                 </section>
 
-                <section class="company-attributes card">
+                <section class="company-attributes card" aria-label="Company details">
                     <h2>Company Details</h2>
                     <ul class="attribute-list">
                         <li><strong>Ticker:</strong> AMZN (NASDAQ)</li>
@@ -176,25 +155,10 @@
                         <li><strong>NAICS Code:</strong> 454110</li>
                     </ul>
                 </section>
-                
-                <section class="similar-companies card">
+
+                <section class="similar-companies card" aria-label="Similar companies">
                     <h2>Similar Companies</h2>
-                    <ul class="similar-list">
-                        <li>
-                            <img src="https://via.placeholder.com/30" alt="Logo">
-                            <div class="similar-info">
-                                <a href="#">CloudNet</a>
-                                <span>Software • $1B Rev</span>
-                            </div>
-                        </li>
-                        <li>
-                            <img src="https://via.placeholder.com/30" alt="Logo">
-                            <div class="similar-info">
-                                <a href="#">DataStream AI</a>
-                                <span>Software • $800M Rev</span>
-                            </div>
-                        </li>
-                    </ul>
+                    <ul class="similar-list"></ul>
                 </section>
             </div>
         </aside>
@@ -205,6 +169,258 @@
             <p>&copy; 2026 ZoomInfoClone AI Profile Builder. All rights reserved.</p>
         </div>
     </footer>
-    <script src="script.js"></script>
+
+    <script>
+        /**
+         * Application bootstrap for the company profile page.
+         * Encapsulates rendering, tab switching, read-more toggling,
+         * and graceful image fallback handling.
+         */
+        (function () {
+            'use strict';
+
+            /** Inline SVG placeholder used when external logos fail to load. */
+            const PLACEHOLDER_SVG =
+                "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30'%3E%3Crect width='30' height='30' fill='%23e5e7eb'/%3E%3C/svg%3E";
+
+            /** Contact data grouped by department panel id. */
+            const CONTACTS = {
+                executives: [
+                    { initials: 'JS', name: 'Jane Smith', role: 'Chief Executive Officer (CEO)' },
+                    { initials: 'JD', name: 'John Doe', role: 'Chief Financial Officer (CFO)' }
+                ],
+                it: [
+                    { initials: 'MK', name: 'Mike Kowalski', role: 'VP of Engineering' }
+                ],
+                marketing: [
+                    { initials: 'AL', name: 'Anna Lee', role: 'Chief Marketing Officer' }
+                ]
+            };
+
+            /** Technology tags displayed in the tech-stack section. */
+            const TECH_STACK = [
+                'AWS', 'React', 'Node.js', 'Python', 'Docker', 'Kubernetes', 'MySQL'
+            ];
+
+            /** Similar-company data rendered in the sidebar. */
+            const SIMILAR_COMPANIES = [
+                { name: 'CloudNet', details: 'Software • $1B Rev' },
+                { name: 'DataStream AI', details: 'Software • $800M Rev' }
+            ];
+
+            /**
+             * Query a single element.
+             * @param {string} selector - CSS selector.
+             * @param {Element|Document} [context=document] - Search context.
+             * @returns {Element|null}
+             */
+            const qs = (selector, context = document) => context.querySelector(selector);
+
+            /**
+             * Query all matching elements.
+             * @param {string} selector - CSS selector.
+             * @param {Element|Document} [context=document] - Search context.
+             * @returns {NodeListOf<Element>}
+             */
+            const qsa = (selector, context = document) => context.querySelectorAll(selector);
+
+            /**
+             * Escape special HTML characters to prevent injection when rendering strings.
+             * @param {string} str - Raw text.
+             * @returns {string}
+             */
+            const escapeHtml = (str) =>
+                String(str).replace(/[&<>"']/g, (ch) => ({
+                    '&': '&amp;',
+                    '<': '&lt;',
+                    '>': '&gt;',
+                    '"': '&quot;',
+                    "'": '&#39;'
+                }[ch]));
+
+            /**
+             * Build a contact-card DOM element from contact data.
+             * @param {Object} contact
+             * @param {string} contact.initials
+             * @param {string} contact.name
+             * @param {string} contact.role
+             * @returns {HTMLElement}
+             */
+            function createContactCard(contact) {
+                const card = document.createElement('article');
+                card.className = 'contact-card';
+                card.innerHTML = `
+                    <div class="contact-avatar">${escapeHtml(contact.initials)}</div>
+                    <div class="contact-info">
+                        <h3>${escapeHtml(contact.name)}</h3>
+                        <p>${escapeHtml(contact.role)}</p>
+                        <a href="#" class="view-contact">View Email &amp; Phone</a>
+                    </div>
+                `;
+                return card;
+            }
+
+            /**
+             * Render contact cards into their respective department tab panels.
+             */
+            function renderContacts() {
+                Object.entries(CONTACTS).forEach(([panelId, contacts]) => {
+                    const panel = qs(`#${panelId}`);
+                    if (!panel) return;
+
+                    panel.innerHTML = '';
+                    contacts.forEach((contact) => panel.appendChild(createContactCard(contact)));
+                });
+            }
+
+            /**
+             * Render technology tags into the tech-stack section.
+             */
+            function renderTechStack() {
+                const container = qs('.tech-tags');
+                if (!container) return;
+
+                container.innerHTML = TECH_STACK
+                    .map((tech) => `<span class="tech-tag">${escapeHtml(tech)}</span>`)
+                    .join('');
+            }
+
+            /**
+             * Render similar-company list items into the sidebar.
+             */
+            function renderSimilarCompanies() {
+                const list = qs('.similar-list');
+                if (!list) return;
+
+                list.innerHTML = SIMILAR_COMPANIES.map((company) => `
+                    <li>
+                        <img src="${PLACEHOLDER_SVG}"
+                             alt="${escapeHtml(company.name)} logo"
+                             width="30" height="30"
+                             loading="lazy"
+                             decoding="async">
+                        <div class="similar-info">
+                            <a href="#">${escapeHtml(company.name)}</a>
+                            <span>${escapeHtml(company.details)}</span>
+                        </div>
+                    </li>
+                `).join('');
+            }
+
+            /**
+             * Wire up delegated image error handling so external logos fall back
+             * to a local SVG placeholder without inline onerror handlers.
+             */
+            function initImageFallbacks() {
+                document.addEventListener('error', function onImageError(event) {
+                    const img = event.target;
+                    if (!(img instanceof HTMLImageElement) || !img.dataset.fallback) return;
+                    if (img.src === img.dataset.fallback) return;
+
+                    img.src = img.dataset.fallback;
+                }, true);
+            }
+
+            /**
+             * Activate a tab and its corresponding panel while updating ARIA states.
+             * @param {HTMLButtonElement} activeBtn - The tab button to activate.
+             */
+            function switchTab(activeBtn) {
+                const tablist = activeBtn.closest('[role="tablist"]');
+                const targetId = activeBtn.dataset.target;
+                const targetPanel = qs(`#${targetId}`);
+                if (!tablist || !targetPanel) return;
+
+                const buttons = qsa('.tab-btn', tablist);
+                const panels = qsa('.tab-content', tablist.parentElement);
+
+                buttons.forEach((btn) => {
+                    const isActive = btn === activeBtn;
+                    btn.classList.toggle('active', isActive);
+                    btn.setAttribute('aria-selected', String(isActive));
+                    btn.setAttribute('tabindex', isActive ? '0' : '-1');
+                });
+
+                panels.forEach((panel) => {
+                    const isActive = panel.id === targetId;
+                    panel.classList.toggle('active', isActive);
+                    panel.setAttribute('aria-hidden', String(!isActive));
+                    panel.hidden = !isActive;
+                });
+            }
+
+            /**
+             * Initialize tabbed contact navigation via event delegation.
+             */
+            function initTabs() {
+                const tablist = qs('[role="tablist"]');
+                if (!tablist) return;
+
+                tablist.addEventListener('click', (event) => {
+                    const btn = event.target.closest('.tab-btn');
+                    if (!btn) return;
+                    switchTab(btn);
+                });
+
+                tablist.addEventListener('keydown', (event) => {
+                    const buttons = Array.from(qsa('.tab-btn', tablist));
+                    const current = tablist.querySelector('.tab-btn.active');
+                    let idx = buttons.indexOf(current);
+
+                    if (event.key === 'ArrowRight') {
+                        idx = (idx + 1) % buttons.length;
+                    } else if (event.key === 'ArrowLeft') {
+                        idx = (idx - 1 + buttons.length) % buttons.length;
+                    } else {
+                        return;
+                    }
+
+                    event.preventDefault();
+                    buttons[idx].focus();
+                    switchTab(buttons[idx]);
+                });
+            }
+
+            /**
+             * Initialize the read-more / read-less expander for the about section.
+             */
+            function initReadMore() {
+                const aboutContent = qs('.about-content');
+                if (!aboutContent) return;
+
+                const button = qs('.read-more-btn', aboutContent);
+                const description = qs('.description-text', aboutContent);
+                if (!button || !description) return;
+
+                button.addEventListener('click', () => {
+                    const expanded = aboutContent.classList.toggle('expanded');
+                    description.classList.toggle('expanded', expanded);
+
+                    button.setAttribute('aria-expanded', String(expanded));
+                    button.innerHTML = expanded
+                        ? `Read Less <i class="fas fa-chevron-up" aria-hidden="true"></i>`
+                        : `Read More <i class="fas fa-chevron-down" aria-hidden="true"></i>`;
+                });
+            }
+
+            /**
+             * Bootstrap all dynamic behavior once the DOM is ready.
+             */
+            function init() {
+                initImageFallbacks();
+                renderContacts();
+                renderTechStack();
+                renderSimilarCompanies();
+                initTabs();
+                initReadMore();
+            }
+
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', init);
+            } else {
+                init();
+            }
+        })();
+    </script>
 </body>
 </html>
