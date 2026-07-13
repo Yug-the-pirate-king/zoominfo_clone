@@ -1,38 +1,50 @@
 document.addEventListener("DOMContentLoaded", () => {
-    // Read More functionality
-    const readMoreBtn = document.querySelector('.read-more-btn');
+    const readMoreButton = document.querySelector('.read-more-btn');
     const aboutContent = document.querySelector('.about-content');
 
-    if (readMoreBtn && aboutContent) {
-        readMoreBtn.addEventListener('click', () => {
+    function updateReadMoreButton(button, isExpanded) {
+        const label = isExpanded ? 'Read Less' : 'Read More';
+        const iconClass = isExpanded ? 'fas fa-chevron-up' : 'fas fa-chevron-down';
+
+        button.textContent = label + ' ';
+
+        const icon = document.createElement('i');
+        icon.className = iconClass;
+        button.appendChild(icon);
+    }
+
+    if (readMoreButton && aboutContent) {
+        readMoreButton.addEventListener('click', () => {
             aboutContent.classList.toggle('expanded');
-            if (aboutContent.classList.contains('expanded')) {
-                readMoreBtn.innerHTML = 'Read Less <i class="fas fa-chevron-up"></i>';
-            } else {
-                readMoreBtn.innerHTML = 'Read More <i class="fas fa-chevron-down"></i>';
-            }
+            const isExpanded = aboutContent.classList.contains('expanded');
+            updateReadMoreButton(readMoreButton, isExpanded);
         });
     }
 
-    // Tabs functionality
-    const tabBtns = document.querySelectorAll('.tab-btn');
+    const tabButtons = document.querySelectorAll('.tab-btn');
     const tabContents = document.querySelectorAll('.tab-content');
 
-    tabBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            // Remove active class from all buttons and contents
-            tabBtns.forEach(b => b.classList.remove('active'));
-            tabContents.forEach(c => c.classList.remove('active'));
+    function deactivateAllTabs() {
+        tabButtons.forEach(button => button.classList.remove('active'));
+        tabContents.forEach(content => content.classList.remove('active'));
+    }
 
-            // Add active class to clicked button
-            btn.classList.add('active');
+    function activateTab(button) {
+        deactivateAllTabs();
+        button.classList.add('active');
 
-            // Show corresponding content
-            const targetId = btn.getAttribute('data-target');
-            const targetContent = document.getElementById(targetId);
-            if (targetContent) {
-                targetContent.classList.add('active');
-            }
-        });
+        const targetId = button.dataset.target || '';
+        if (!/^[\w-]+$/.test(targetId)) {
+            return;
+        }
+
+        const targetContent = document.getElementById(targetId);
+        if (targetContent) {
+            targetContent.classList.add('active');
+        }
+    }
+
+    tabButtons.forEach(button => {
+        button.addEventListener('click', () => activateTab(button));
     });
 });
