@@ -13,10 +13,17 @@
     --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
 
-* {
+*,
+*::before,
+*::after {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
 }
 
 body {
@@ -31,21 +38,40 @@ a {
     text-decoration: none;
 }
 
-a:hover {
+a:hover,
+a:focus-visible {
     text-decoration: underline;
+}
+
+a:focus-visible {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+}
+
+button,
+input {
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+}
+
+button:focus-visible,
+input:focus-visible {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
 }
 
 .container {
     max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
+    margin-inline: auto;
+    padding-inline: 20px;
 }
 
 /* Header */
 .site-header {
     background-color: var(--bg-card);
     border-bottom: 1px solid var(--border-color);
-    padding: 15px 0;
+    padding-block: 15px;
     position: sticky;
     top: 0;
     z-index: 100;
@@ -74,7 +100,6 @@ a:hover {
     padding: 10px 40px 10px 15px;
     border: 1px solid var(--border-color);
     border-radius: 20px;
-    outline: none;
     font-size: 0.9rem;
 }
 
@@ -102,11 +127,13 @@ a:hover {
 
 .header-nav .btn-login {
     background-color: var(--primary-color);
-    color: white;
+    color: var(--bg-card);
     padding: 8px 16px;
     border-radius: 4px;
 }
-.header-nav .btn-login:hover {
+
+.header-nav .btn-login:hover,
+.header-nav .btn-login:focus-visible {
     background-color: var(--primary-hover);
     text-decoration: none;
 }
@@ -117,6 +144,7 @@ a:hover {
     font-size: 0.85rem;
     color: var(--text-muted);
 }
+
 .breadcrumbs a {
     color: var(--text-muted);
 }
@@ -141,8 +169,8 @@ a:hover {
 .card h2 {
     font-size: 1.25rem;
     margin-bottom: 16px;
-    border-bottom: 1px solid var(--border-color);
     padding-bottom: 12px;
+    border-bottom: 1px solid var(--border-color);
 }
 
 /* Hero Section */
@@ -214,10 +242,15 @@ a:hover {
 .about-content .more-text {
     display: none;
 }
+
 .about-content.expanded .more-text {
     display: inline;
 }
+
 .read-more-btn {
+    display: flex;
+    align-items: center;
+    gap: 4px;
     background: none;
     border: none;
     color: var(--primary-color);
@@ -225,9 +258,6 @@ a:hover {
     cursor: pointer;
     margin-top: 10px;
     padding: 0;
-    display: flex;
-    align-items: center;
-    gap: 4px;
 }
 
 /* Contacts Section */
@@ -249,6 +279,11 @@ a:hover {
     border-bottom: 2px solid transparent;
 }
 
+.tab-btn:hover,
+.tab-btn:focus-visible {
+    color: var(--primary-color);
+}
+
 .tab-btn.active {
     color: var(--primary-color);
     border-bottom-color: var(--primary-color);
@@ -265,11 +300,11 @@ a:hover {
 .contact-card {
     display: flex;
     gap: 16px;
+    align-items: center;
     padding: 16px;
     border: 1px solid var(--border-color);
     border-radius: var(--border-radius);
     margin-bottom: 12px;
-    align-items: center;
 }
 
 .contact-avatar {
@@ -333,21 +368,19 @@ a:hover {
     margin-top: 4px;
 }
 
-.attribute-list {
+.attribute-list,
+.similar-list {
     list-style: none;
 }
 
 .attribute-list li {
-    padding: 8px 0;
+    padding-block: 8px;
     border-bottom: 1px solid var(--border-color);
     font-size: 0.9rem;
 }
+
 .attribute-list li:last-child {
     border-bottom: none;
-}
-
-.similar-list {
-    list-style: none;
 }
 
 .similar-list li {
@@ -372,34 +405,32 @@ a:hover {
 
 /* Footer */
 .site-footer {
-    background-color: white;
+    background-color: var(--bg-card);
     text-align: center;
-    padding: 24px 0;
+    padding-block: 24px;
     border-top: 1px solid var(--border-color);
     color: var(--text-muted);
     font-size: 0.9rem;
 }
 
 /* Responsive Design */
-
-/* Tablet / Medium Screens (768px and down) */
 @media (max-width: 992px) {
     .page-content {
         grid-template-columns: 1fr;
     }
+
     .sticky-sidebar {
         position: static;
     }
 }
 
-/* Mobile Screens (375px and down typically, setting to <768px to cover it) */
 @media (max-width: 768px) {
     .hero-stats {
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: repeat(2, 1fr);
     }
-    
+
     .header-nav {
-        display: none; /* Hide nav on mobile for simplicity, or could add hamburger */
+        display: none;
     }
 
     .search-bar {
@@ -423,8 +454,8 @@ a:hover {
         flex-direction: column;
         text-align: center;
     }
-    
+
     .search-bar {
-        display: none; /* Hide search bar on very small screens for demo */
+        display: none;
     }
 }
