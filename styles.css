@@ -1,18 +1,50 @@
-/* Base Styles & Variables */
+/* =============================================================================
+   FILE: styles.css
+   -----------------------------------------------------------------------------
+   Overview:
+     Shared stylesheet for the ZoomInfo-style company profile page. Defines
+     design tokens, base typography, layout components (header, hero, cards,
+     sidebar, footer), and responsive breakpoints.
+
+   Design goals:
+     - Use CSS custom properties for a consistent, themeable palette.
+     - Keep selectors flat and grouped by page region.
+     - Provide a mobile-first, readable responsive experience.
+   ============================================================================= */
+
+/* -----------------------------------------------------------------------------
+   1. Design Tokens (Global Variables)
+   ----------------------------------------------------------------------------- */
 :root {
+    /* Brand colors */
     --primary-color: #0052cc;
     --primary-hover: #003d99;
+
+    /* Text colors */
     --text-main: #172b4d;
     --text-muted: #5e6c84;
+
+    /* Surface colors */
     --bg-main: #f4f5f7;
     --bg-card: #ffffff;
+
+    /* Utility colors */
     --border-color: #dfe1e6;
-    --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
-    --shadow-md: 0 4px 6px rgba(0,0,0,0.05);
+
+    /* Elevation */
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.05);
+
+    /* Geometry */
     --border-radius: 8px;
+
+    /* Typography */
     --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
 
+/* -----------------------------------------------------------------------------
+   2. Reset & Base Styles
+   ----------------------------------------------------------------------------- */
 * {
     box-sizing: border-box;
     margin: 0;
@@ -41,11 +73,15 @@ a:hover {
     padding: 0 20px;
 }
 
-/* Header */
+/* -----------------------------------------------------------------------------
+   3. Site Header
+   ----------------------------------------------------------------------------- */
 .site-header {
     background-color: var(--bg-card);
     border-bottom: 1px solid var(--border-color);
     padding: 15px 0;
+
+    /* Keep the header accessible while scrolling long pages */
     position: sticky;
     top: 0;
     z-index: 100;
@@ -102,26 +138,32 @@ a:hover {
 
 .header-nav .btn-login {
     background-color: var(--primary-color);
-    color: white;
+    color: var(--bg-card);
     padding: 8px 16px;
     border-radius: 4px;
 }
+
 .header-nav .btn-login:hover {
     background-color: var(--primary-hover);
     text-decoration: none;
 }
 
-/* Breadcrumbs */
+/* -----------------------------------------------------------------------------
+   4. Breadcrumbs
+   ----------------------------------------------------------------------------- */
 .breadcrumbs {
     padding: 15px 20px;
     font-size: 0.85rem;
     color: var(--text-muted);
 }
+
 .breadcrumbs a {
     color: var(--text-muted);
 }
 
-/* Layout */
+/* -----------------------------------------------------------------------------
+   5. Main Layout
+   ----------------------------------------------------------------------------- */
 .page-content {
     display: grid;
     grid-template-columns: 2.5fr 1fr;
@@ -145,7 +187,9 @@ a:hover {
     padding-bottom: 12px;
 }
 
-/* Hero Section */
+/* -----------------------------------------------------------------------------
+   6. Hero Section
+   ----------------------------------------------------------------------------- */
 .hero-header {
     display: flex;
     gap: 24px;
@@ -210,13 +254,17 @@ a:hover {
     font-weight: 700;
 }
 
-/* About Section */
+/* -----------------------------------------------------------------------------
+   7. About Section
+   ----------------------------------------------------------------------------- */
 .about-content .more-text {
     display: none;
 }
+
 .about-content.expanded .more-text {
     display: inline;
 }
+
 .read-more-btn {
     background: none;
     border: none;
@@ -230,7 +278,9 @@ a:hover {
     gap: 4px;
 }
 
-/* Contacts Section */
+/* -----------------------------------------------------------------------------
+   8. Contacts Section
+   ----------------------------------------------------------------------------- */
 .tabs {
     display: flex;
     gap: 16px;
@@ -300,7 +350,9 @@ a:hover {
     font-weight: 600;
 }
 
-/* Tech Stack */
+/* -----------------------------------------------------------------------------
+   9. Tech Stack
+   ----------------------------------------------------------------------------- */
 .tech-tags {
     display: flex;
     flex-wrap: wrap;
@@ -316,7 +368,9 @@ a:hover {
     font-weight: 500;
 }
 
-/* Sidebar */
+/* -----------------------------------------------------------------------------
+   10. Sidebar
+   ----------------------------------------------------------------------------- */
 .sticky-sidebar {
     position: sticky;
     top: 80px;
@@ -342,6 +396,7 @@ a:hover {
     border-bottom: 1px solid var(--border-color);
     font-size: 0.9rem;
 }
+
 .attribute-list li:last-child {
     border-bottom: none;
 }
@@ -370,9 +425,11 @@ a:hover {
     color: var(--text-muted);
 }
 
-/* Footer */
+/* -----------------------------------------------------------------------------
+   11. Site Footer
+   ----------------------------------------------------------------------------- */
 .site-footer {
-    background-color: white;
+    background-color: var(--bg-card);
     text-align: center;
     padding: 24px 0;
     border-top: 1px solid var(--border-color);
@@ -380,26 +437,30 @@ a:hover {
     font-size: 0.9rem;
 }
 
-/* Responsive Design */
+/* -----------------------------------------------------------------------------
+   12. Responsive Design
+   ----------------------------------------------------------------------------- */
 
-/* Tablet / Medium Screens (768px and down) */
+/* Tablets and medium screens */
 @media (max-width: 992px) {
     .page-content {
         grid-template-columns: 1fr;
     }
+
     .sticky-sidebar {
         position: static;
     }
 }
 
-/* Mobile Screens (375px and down typically, setting to <768px to cover it) */
+/* Small tablets and large phones */
 @media (max-width: 768px) {
     .hero-stats {
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: repeat(2, 1fr);
     }
-    
+
     .header-nav {
-        display: none; /* Hide nav on mobile for simplicity, or could add hamburger */
+        /* Simplified mobile header; a hamburger menu can be added separately */
+        display: none;
     }
 
     .search-bar {
@@ -408,6 +469,7 @@ a:hover {
     }
 }
 
+/* Small phones */
 @media (max-width: 480px) {
     .hero-header {
         flex-direction: column;
@@ -423,8 +485,8 @@ a:hover {
         flex-direction: column;
         text-align: center;
     }
-    
+
     .search-bar {
-        display: none; /* Hide search bar on very small screens for demo */
+        display: none;
     }
 }
