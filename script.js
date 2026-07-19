@@ -1,38 +1,44 @@
+/**
+ * Initializes all interactive components after the DOM has finished loading.
+ */
 document.addEventListener("DOMContentLoaded", () => {
-    // Read More functionality
+    initializeReadMore();
+    initializeTabs();
+});
+
+/**
+ * Toggles the expanded state of the about section and updates the button label.
+ */
+function initializeReadMore() {
     const readMoreBtn = document.querySelector('.read-more-btn');
     const aboutContent = document.querySelector('.about-content');
 
-    if (readMoreBtn && aboutContent) {
-        readMoreBtn.addEventListener('click', () => {
-            aboutContent.classList.toggle('expanded');
-            if (aboutContent.classList.contains('expanded')) {
-                readMoreBtn.innerHTML = 'Read Less <i class="fas fa-chevron-up"></i>';
-            } else {
-                readMoreBtn.innerHTML = 'Read More <i class="fas fa-chevron-down"></i>';
-            }
-        });
-    }
+    if (!readMoreBtn || !aboutContent) return;
 
-    // Tabs functionality
+    readMoreBtn.addEventListener('click', () => {
+        const isExpanded = aboutContent.classList.toggle('expanded');
+        readMoreBtn.innerHTML = isExpanded
+            ? 'Read Less <i class="fas fa-chevron-up"></i>'
+            : 'Read More <i class="fas fa-chevron-down"></i>';
+    });
+}
+
+/**
+ * Activates the corresponding tab content panel when a tab button is clicked.
+ */
+function initializeTabs() {
     const tabBtns = document.querySelectorAll('.tab-btn');
     const tabContents = document.querySelectorAll('.tab-content');
 
     tabBtns.forEach(btn => {
         btn.addEventListener('click', () => {
-            // Remove active class from all buttons and contents
             tabBtns.forEach(b => b.classList.remove('active'));
             tabContents.forEach(c => c.classList.remove('active'));
 
-            // Add active class to clicked button
             btn.classList.add('active');
 
-            // Show corresponding content
-            const targetId = btn.getAttribute('data-target');
-            const targetContent = document.getElementById(targetId);
-            if (targetContent) {
-                targetContent.classList.add('active');
-            }
+            const targetContent = document.getElementById(btn.dataset.target);
+            targetContent?.classList.add('active');
         });
     });
-});
+}
