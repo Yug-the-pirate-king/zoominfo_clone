@@ -1,38 +1,43 @@
-document.addEventListener("DOMContentLoaded", () => {
-    // Read More functionality
-    const readMoreBtn = document.querySelector('.read-more-btn');
-    const aboutContent = document.querySelector('.about-content');
+'use strict';
 
-    if (readMoreBtn && aboutContent) {
-        readMoreBtn.addEventListener('click', () => {
-            aboutContent.classList.toggle('expanded');
-            if (aboutContent.classList.contains('expanded')) {
-                readMoreBtn.innerHTML = 'Read Less <i class="fas fa-chevron-up"></i>';
-            } else {
-                readMoreBtn.innerHTML = 'Read More <i class="fas fa-chevron-down"></i>';
-            }
-        });
-    }
+document.addEventListener('DOMContentLoaded', () => {
+  const readMoreBtn = document.querySelector('.read-more-btn');
+  const aboutContent = document.querySelector('.about-content');
 
-    // Tabs functionality
-    const tabBtns = document.querySelectorAll('.tab-btn');
-    const tabContents = document.querySelectorAll('.tab-content');
+  if (readMoreBtn && aboutContent) {
+    const label = document.createTextNode('Read More ');
+    const icon = document.createElement('i');
+    icon.className = 'fas fa-chevron-down';
+    readMoreBtn.replaceChildren(label, icon);
+    readMoreBtn.setAttribute('aria-expanded', 'false');
+
+    readMoreBtn.addEventListener('click', () => {
+      aboutContent.classList.toggle('expanded');
+      const expanded = aboutContent.classList.contains('expanded');
+      label.textContent = expanded ? 'Read Less ' : 'Read More ';
+      icon.className = expanded ? 'fas fa-chevron-up' : 'fas fa-chevron-down';
+      readMoreBtn.setAttribute('aria-expanded', String(expanded));
+    });
+  }
+
+  const tabBtns = document.querySelectorAll('.tab-btn');
+  const tabContents = document.querySelectorAll('.tab-content');
+
+  if (tabBtns.length && tabContents.length) {
+    const contentMap = new Map();
+    tabContents.forEach(content => contentMap.set(content.id, content));
 
     tabBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            // Remove active class from all buttons and contents
-            tabBtns.forEach(b => b.classList.remove('active'));
-            tabContents.forEach(c => c.classList.remove('active'));
+      btn.addEventListener('click', () => {
+        const targetId = btn.dataset.target;
+        const target = targetId ? contentMap.get(targetId) : null;
+        if (!target) return;
 
-            // Add active class to clicked button
-            btn.classList.add('active');
-
-            // Show corresponding content
-            const targetId = btn.getAttribute('data-target');
-            const targetContent = document.getElementById(targetId);
-            if (targetContent) {
-                targetContent.classList.add('active');
-            }
-        });
+        tabBtns.forEach(b => b.classList.remove('active'));
+        tabContents.forEach(c => c.classList.remove('active'));
+        btn.classList.add('active');
+        target.classList.add('active');
+      });
     });
+  }
 });
