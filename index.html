@@ -5,18 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Company Profile Clone</title>
     <link rel="stylesheet" href="styles.css">
-    <!-- Using Font Awesome for icons -->
+    <!-- Font Awesome icon library used for UI icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
+
+    <!--
+      Global site header.
+      Contains brand identity, global site search, and primary navigation links.
+    -->
     <header class="site-header">
         <div class="container">
             <div class="logo">ZoomInfoClone</div>
-            <div class="search-bar">
-                <input type="text" placeholder="Search for companies, contacts, etc.">
-                <button><i class="fas fa-search"></i></button>
+
+            <!-- Global search form for companies, contacts, and more -->
+            <div class="search-bar" role="search" aria-label="Site search">
+                <input type="text" placeholder="Search for companies, contacts, etc." aria-label="Search for companies, contacts, etc.">
+                <button type="button" aria-label="Submit search">
+                    <i class="fas fa-search" aria-hidden="true"></i>
+                </button>
             </div>
-            <nav class="header-nav">
+
+            <!-- Primary navigation links for the application -->
+            <nav class="header-nav" aria-label="Primary navigation">
                 <a href="#">Products</a>
                 <a href="#">Solutions</a>
                 <a href="#">Pricing</a>
@@ -25,30 +36,40 @@
         </div>
     </header>
 
-    <div class="breadcrumbs container">
-        <a href="#">Home</a> > <a href="#">Companies</a> > <span>Amazon</span>
-    </div>
+    <!-- Breadcrumb navigation showing the user's current location -->
+    <nav class="breadcrumbs container" aria-label="Breadcrumb navigation">
+        <a href="#">Home</a> &gt; <a href="#">Companies</a> &gt; <span aria-current="page">Amazon</span>
+    </nav>
 
+    <!--
+      Main page content area.
+      Split into a primary profile column and a supplementary sidebar.
+    -->
     <main class="container page-content">
-        <!-- Main Content (Left Column) -->
+        <!-- Primary profile content column -->
         <div class="main-column">
-            
-            <section class="hero-section card">
+
+            <!-- Hero card: company identity, logo, website, social links, and high-level stats -->
+            <section class="hero-section card" aria-labelledby="company-name">
                 <div class="hero-header">
                     <div class="company-logo-large">
-                        <img src="https://logo.clearbit.com/amazon.com" alt="Amazon Logo" onerror="this.src='https://via.placeholder.com/100'">
+                        <img src="https://logo.clearbit.com/amazon.com" alt="Amazon company logo" onerror="this.src='https://via.placeholder.com/100'">
                     </div>
                     <div class="company-title-area">
-                        <h1>Amazon</h1>
-                        <a href="https://www.amazon.com" class="company-website" target="_blank"><i class="fas fa-link"></i> www.amazon.com</a>
-                        <div class="social-links">
-                            <a href="#"><i class="fab fa-linkedin"></i></a>
-                            <a href="#"><i class="fab fa-twitter"></i></a>
-                            <a href="#"><i class="fab fa-facebook"></i></a>
+                        <h1 id="company-name">Amazon</h1>
+                        <a href="https://www.amazon.com" class="company-website" target="_blank" rel="noopener noreferrer">
+                            <i class="fas fa-link" aria-hidden="true"></i> www.amazon.com
+                        </a>
+                        <div class="social-links" aria-label="Amazon social media links">
+                            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin" aria-hidden="true"></i></a>
+                            <a href="#" aria-label="Twitter"><i class="fab fa-twitter" aria-hidden="true"></i></a>
+                            <a href="#" aria-label="Facebook"><i class="fab fa-facebook" aria-hidden="true"></i></a>
                         </div>
                     </div>
                 </div>
-                <div class="hero-stats">
+
+                <!-- Key company metrics displayed in a horizontal grid -->
+                <div class="hero-stats" aria-label="Key company metrics">
                     <div class="stat">
                         <span class="stat-label">Revenue</span>
                         <span class="stat-value">$574.8B</span>
@@ -68,30 +89,37 @@
                 </div>
             </section>
 
-            <section class="about-section card">
-                <h2>About Amazon</h2>
+            <!-- About card: collapsible company description -->
+            <section class="about-section card" aria-labelledby="about-heading">
+                <h2 id="about-heading">About Amazon</h2>
                 <div class="about-content">
                     <p class="description-text">
-                        Amazon is a leading global technology company specializing in e-commerce, cloud computing, digital streaming, and artificial intelligence. 
+                        Amazon is a leading global technology company specializing in e-commerce, cloud computing, digital streaming, and artificial intelligence.
                         <span class="more-text">
-                            Founded in a garage, it has grown to become one of the most influential economic and cultural forces in the world. 
-                            Our mission is to continually innovate and provide unparalleled services and products to our global customer base. 
+                            Founded in a garage, it has grown to become one of the most influential economic and cultural forces in the world.
+                            Our mission is to continually innovate and provide unparalleled services and products to our global customer base.
                             We strive to be Earth's most customer-centric company, where people can find and discover anything they want to buy online.
                         </span>
                     </p>
-                    <button class="read-more-btn">Read More <i class="fas fa-chevron-down"></i></button>
+                    <button class="read-more-btn" type="button" aria-expanded="false" aria-controls="about-heading">
+                        Read More <i class="fas fa-chevron-down" aria-hidden="true"></i>
+                    </button>
                 </div>
             </section>
 
-            <section class="contacts-section card">
-                <h2>Key Contacts</h2>
-                <div class="tabs">
-                    <button class="tab-btn active" data-target="executives">Executives</button>
-                    <button class="tab-btn" data-target="it">IT & Engineering</button>
-                    <button class="tab-btn" data-target="marketing">Marketing</button>
+            <!-- Key contacts card with department tabbed navigation -->
+            <section class="contacts-section card" aria-labelledby="contacts-heading">
+                <h2 id="contacts-heading">Key Contacts</h2>
+
+                <!-- Department tab buttons; each button targets a matching tab panel by id -->
+                <div class="tabs" role="tablist" aria-label="Contact departments">
+                    <button class="tab-btn active" type="button" role="tab" aria-selected="true" aria-controls="executives" data-target="executives">Executives</button>
+                    <button class="tab-btn" type="button" role="tab" aria-selected="false" aria-controls="it" data-target="it">IT & Engineering</button>
+                    <button class="tab-btn" type="button" role="tab" aria-selected="false" aria-controls="marketing" data-target="marketing">Marketing</button>
                 </div>
-                
-                <div class="tab-content active" id="executives">
+
+                <!-- Executives tab panel -->
+                <div class="tab-content active" id="executives" role="tabpanel" aria-labelledby="executives-tab">
                     <div class="contact-card">
                         <div class="contact-avatar">JS</div>
                         <div class="contact-info">
@@ -109,7 +137,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="tab-content" id="it">
+
+                <!-- IT & Engineering tab panel -->
+                <div class="tab-content" id="it" role="tabpanel" aria-labelledby="it-tab">
                     <div class="contact-card">
                         <div class="contact-avatar">MK</div>
                         <div class="contact-info">
@@ -119,7 +149,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="tab-content" id="marketing">
+
+                <!-- Marketing tab panel -->
+                <div class="tab-content" id="marketing" role="tabpanel" aria-labelledby="marketing-tab">
                     <div class="contact-card">
                         <div class="contact-avatar">AL</div>
                         <div class="contact-info">
@@ -131,9 +163,10 @@
                 </div>
             </section>
 
-            <section class="tech-stack-section card">
-                <h2>Technologies Used</h2>
-                <div class="tech-tags">
+            <!-- Technologies used by the company -->
+            <section class="tech-stack-section card" aria-labelledby="tech-heading">
+                <h2 id="tech-heading">Technologies Used</h2>
+                <div class="tech-tags" aria-label="List of technologies">
                     <span class="tech-tag">AWS</span>
                     <span class="tech-tag">React</span>
                     <span class="tech-tag">Node.js</span>
@@ -146,20 +179,22 @@
 
         </div>
 
-        <!-- Sidebar (Right Column) -->
+        <!-- Supplementary profile sidebar -->
         <aside class="sidebar">
             <div class="sticky-sidebar">
-                <section class="contact-details card">
-                    <h2>Contact Info</h2>
+
+                <!-- Direct contact and address information -->
+                <section class="contact-details card" aria-labelledby="contact-info-heading">
+                    <h2 id="contact-info-heading">Contact Info</h2>
                     <div class="contact-item">
-                        <i class="fas fa-phone"></i>
+                        <i class="fas fa-phone" aria-hidden="true"></i>
                         <div>
                             <strong>Main Phone</strong>
                             <p>(206) 266-1000</p>
                         </div>
                     </div>
                     <div class="contact-item">
-                        <i class="fas fa-map-marker-alt"></i>
+                        <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
                         <div>
                             <strong>Headquarters</strong>
                             <p>410 Terry Ave N<br>Seattle, Washington 98109<br>United States</p>
@@ -167,8 +202,9 @@
                     </div>
                 </section>
 
-                <section class="company-attributes card">
-                    <h2>Company Details</h2>
+                <!-- Structured company attributes and identifiers -->
+                <section class="company-attributes card" aria-labelledby="company-details-heading">
+                    <h2 id="company-details-heading">Company Details</h2>
                     <ul class="attribute-list">
                         <li><strong>Ticker:</strong> AMZN (NASDAQ)</li>
                         <li><strong>Type:</strong> Public</li>
@@ -176,19 +212,20 @@
                         <li><strong>NAICS Code:</strong> 454110</li>
                     </ul>
                 </section>
-                
-                <section class="similar-companies card">
-                    <h2>Similar Companies</h2>
+
+                <!-- Similar company recommendations -->
+                <section class="similar-companies card" aria-labelledby="similar-heading">
+                    <h2 id="similar-heading">Similar Companies</h2>
                     <ul class="similar-list">
                         <li>
-                            <img src="https://via.placeholder.com/30" alt="Logo">
+                            <img src="https://via.placeholder.com/30" alt="CloudNet company logo">
                             <div class="similar-info">
                                 <a href="#">CloudNet</a>
                                 <span>Software • $1B Rev</span>
                             </div>
                         </li>
                         <li>
-                            <img src="https://via.placeholder.com/30" alt="Logo">
+                            <img src="https://via.placeholder.com/30" alt="DataStream AI company logo">
                             <div class="similar-info">
                                 <a href="#">DataStream AI</a>
                                 <span>Software • $800M Rev</span>
@@ -196,15 +233,19 @@
                         </li>
                     </ul>
                 </section>
+
             </div>
         </aside>
     </main>
 
+    <!-- Site footer with copyright information -->
     <footer class="site-footer">
         <div class="container">
             <p>&copy; 2026 ZoomInfoClone AI Profile Builder. All rights reserved.</p>
         </div>
     </footer>
+
+    <!-- Application logic for interactive components (tabs, read-more toggle, etc.) -->
     <script src="script.js"></script>
 </body>
 </html>
