@@ -24,6 +24,7 @@ body {
     background-color: var(--bg-main);
     color: var(--text-main);
     line-height: 1.5;
+    overflow-wrap: break-word;
 }
 
 a {
@@ -67,6 +68,7 @@ a:hover {
     display: flex;
     flex: 0 1 400px;
     position: relative;
+    min-width: 0;
 }
 
 .search-bar input {
@@ -76,6 +78,12 @@ a:hover {
     border-radius: 20px;
     outline: none;
     font-size: 0.9rem;
+}
+
+.search-bar input:focus-visible {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(0, 82, 204, 0.15);
+    outline: none;
 }
 
 .search-bar button {
@@ -129,6 +137,10 @@ a:hover {
     margin-bottom: 40px;
 }
 
+.page-content > * {
+    min-width: 0;
+}
+
 .card {
     background-color: var(--bg-card);
     border: 1px solid var(--border-color);
@@ -159,6 +171,10 @@ a:hover {
     border-radius: var(--border-radius);
     border: 1px solid var(--border-color);
     object-fit: cover;
+}
+
+.company-title-area {
+    min-width: 0;
 }
 
 .company-title-area h1 {
@@ -196,6 +212,7 @@ a:hover {
 .stat {
     display: flex;
     flex-direction: column;
+    min-width: 0;
 }
 
 .stat-label {
@@ -284,6 +301,10 @@ a:hover {
     color: var(--text-muted);
 }
 
+.contact-info {
+    min-width: 0;
+}
+
 .contact-info h3 {
     font-size: 1.1rem;
     margin-bottom: 4px;
@@ -358,11 +379,15 @@ a:hover {
 
 .similar-list img {
     border-radius: 4px;
+    max-width: 100%;
+    height: auto;
+    display: block;
 }
 
 .similar-info {
     display: flex;
     flex-direction: column;
+    min-width: 0;
 }
 
 .similar-info span {
@@ -372,7 +397,7 @@ a:hover {
 
 /* Footer */
 .site-footer {
-    background-color: white;
+    background-color: var(--bg-card);
     text-align: center;
     padding: 24px 0;
     border-top: 1px solid var(--border-color);
