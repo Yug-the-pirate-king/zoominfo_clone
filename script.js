@@ -1,38 +1,80 @@
+/**
+ * Initializes interactive components once the DOM is fully loaded.
+ */
 document.addEventListener("DOMContentLoaded", () => {
-    // Read More functionality
-    const readMoreBtn = document.querySelector('.read-more-btn');
-    const aboutContent = document.querySelector('.about-content');
+    initializeReadMoreToggle();
+    initializeTabNavigation();
+});
 
-    if (readMoreBtn && aboutContent) {
-        readMoreBtn.addEventListener('click', () => {
-            aboutContent.classList.toggle('expanded');
-            if (aboutContent.classList.contains('expanded')) {
-                readMoreBtn.innerHTML = 'Read Less <i class="fas fa-chevron-up"></i>';
-            } else {
-                readMoreBtn.innerHTML = 'Read More <i class="fas fa-chevron-down"></i>';
-            }
-        });
+/**
+ * Sets up the "Read More / Read Less" toggle for the about section.
+ */
+function initializeReadMoreToggle() {
+    const readMoreButton = document.querySelector(".read-more-btn");
+    const aboutContent = document.querySelector(".about-content");
+
+    if (!readMoreButton || !aboutContent) {
+        return;
     }
 
-    // Tabs functionality
-    const tabBtns = document.querySelectorAll('.tab-btn');
-    const tabContents = document.querySelectorAll('.tab-content');
+    readMoreButton.addEventListener("click", () => {
+        const isExpanded = aboutContent.classList.toggle("expanded");
+        updateReadMoreButton(readMoreButton, isExpanded);
+    });
+}
 
-    tabBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            // Remove active class from all buttons and contents
-            tabBtns.forEach(b => b.classList.remove('active'));
-            tabContents.forEach(c => c.classList.remove('active'));
+/**
+ * Updates the read-more button label and chevron icon.
+ *
+ * @param {HTMLElement} button - The read-more button element.
+ * @param {boolean} isExpanded - Whether the about content is expanded.
+ */
+function updateReadMoreButton(button, isExpanded) {
+    const label = isExpanded ? "Read Less" : "Read More";
+    const iconClass = isExpanded ? "fa-chevron-up" : "fa-chevron-down";
+    button.innerHTML = `${label} <i class="fas ${iconClass}"></i>`;
+}
 
-            // Add active class to clicked button
-            btn.classList.add('active');
+/**
+ * Sets up tab navigation using a precomputed content map and active-state tracking.
+ */
+function initializeTabNavigation() {
+    const tabButtons = document.querySelectorAll(".tab-btn");
 
-            // Show corresponding content
-            const targetId = btn.getAttribute('data-target');
-            const targetContent = document.getElementById(targetId);
-            if (targetContent) {
-                targetContent.classList.add('active');
+    if (tabButtons.length === 0) {
+        return;
+    }
+
+    const tabContentByTarget = new Map();
+    tabButtons.forEach((button) => {
+        const targetId = button.dataset.target;
+        if (targetId) {
+            tabContentByTarget.set(targetId, document.getElementById(targetId));
+        }
+    });
+
+    let activeTabButton = document.querySelector(".tab-btn.active");
+    let activeTabContent = document.querySelector(".tab-content.active");
+
+    tabButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+            const targetId = button.dataset.target;
+            const targetContent = targetId ? tabContentByTarget.get(targetId) : null;
+
+            if (activeTabButton) {
+                activeTabButton.classList.remove("active");
             }
+            if (activeTabContent) {
+                activeTabContent.classList.remove("active");
+            }
+
+            button.classList.add("active");
+            if (targetContent) {
+                targetContent.classList.add("active");
+            }
+
+            activeTabButton = button;
+            activeTabContent = targetContent;
         });
     });
-});
+}
