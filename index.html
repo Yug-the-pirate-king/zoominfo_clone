@@ -4,19 +4,48 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Company Profile Clone</title>
+
+    <!-- Performance: preconnect to the CSS/image CDNs we use -->
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="dns-prefetch" href="https://logo.clearbit.com">
+
+    <!-- Performance: defer non-critical JS until the DOM is parsed -->
+    <script src="script.js" defer></script>
+
+    <!-- Main stylesheet -->
     <link rel="stylesheet" href="styles.css">
-    <!-- Using Font Awesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Font Awesome icons with SRI so a compromised CDN cannot inject malicious CSS -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+          integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+          crossorigin="anonymous"
+          referrerpolicy="no-referrer">
 </head>
 <body>
+    <!-- Site Header -->
     <header class="site-header">
         <div class="container">
+            <!-- Brand / Logo -->
             <div class="logo">ZoomInfoClone</div>
-            <div class="search-bar">
-                <input type="text" placeholder="Search for companies, contacts, etc.">
-                <button><i class="fas fa-search"></i></button>
+
+            <!-- Search bar -->
+            <div class="search-bar" role="search">
+                <!-- Security / UX: limit length, disable autocomplete on this demo field, and label the icon-only button -->
+                <input type="search"
+                       name="q"
+                       placeholder="Search for companies, contacts, etc."
+                       maxlength="200"
+                       autocomplete="off"
+                       inputmode="search"
+                       aria-label="Search for companies, contacts, etc.">
+                <button type="button" aria-label="Submit search">
+                    <i class="fas fa-search" aria-hidden="true"></i>
+                </button>
             </div>
-            <nav class="header-nav">
+
+            <!-- Main navigation -->
+            <nav class="header-nav" aria-label="Main navigation">
                 <a href="#">Products</a>
                 <a href="#">Solutions</a>
                 <a href="#">Pricing</a>
@@ -25,30 +54,51 @@
         </div>
     </header>
 
-    <div class="breadcrumbs container">
-        <a href="#">Home</a> > <a href="#">Companies</a> > <span>Amazon</span>
-    </div>
+    <!-- Breadcrumb navigation -->
+    <nav class="breadcrumbs container" aria-label="Breadcrumb">
+        <a href="#">Home</a> &gt; <a href="#">Companies</a> &gt; <span aria-current="page">Amazon</span>
+    </nav>
 
+    <!-- Page content -->
     <main class="container page-content">
         <!-- Main Content (Left Column) -->
         <div class="main-column">
-            
+
+            <!-- Hero / company overview card -->
             <section class="hero-section card">
                 <div class="hero-header">
                     <div class="company-logo-large">
-                        <img src="https://logo.clearbit.com/amazon.com" alt="Amazon Logo" onerror="this.src='https://via.placeholder.com/100'">
+                        <!--
+                            Security: removed inline onerror handler.
+                            The fallback URL is stored in data-fallback-src and applied by script.js
+                            (or the small deferred block at the bottom of the body).
+                        -->
+                        <img src="https://logo.clearbit.com/amazon.com"
+                             data-fallback-src="https://via.placeholder.com/100"
+                             alt="Amazon Logo"
+                             width="100"
+                             height="100"
+                             decoding="async">
                     </div>
                     <div class="company-title-area">
                         <h1>Amazon</h1>
-                        <a href="https://www.amazon.com" class="company-website" target="_blank"><i class="fas fa-link"></i> www.amazon.com</a>
-                        <div class="social-links">
-                            <a href="#"><i class="fab fa-linkedin"></i></a>
-                            <a href="#"><i class="fab fa-twitter"></i></a>
-                            <a href="#"><i class="fab fa-facebook"></i></a>
+                        <!-- Security: rel="noopener noreferrer" on all target="_blank" links -->
+                        <a href="https://www.amazon.com"
+                           class="company-website"
+                           target="_blank"
+                           rel="noopener noreferrer">
+                            <i class="fas fa-link" aria-hidden="true"></i> www.amazon.com
+                        </a>
+                        <div class="social-links" aria-label="Social media links">
+                            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin" aria-hidden="true"></i></a>
+                            <a href="#" aria-label="Twitter"><i class="fab fa-twitter" aria-hidden="true"></i></a>
+                            <a href="#" aria-label="Facebook"><i class="fab fa-facebook" aria-hidden="true"></i></a>
                         </div>
                     </div>
                 </div>
-                <div class="hero-stats">
+
+                <!-- Key stats grid -->
+                <div class="hero-stats" aria-label="Key company statistics">
                     <div class="stat">
                         <span class="stat-label">Revenue</span>
                         <span class="stat-value">$574.8B</span>
@@ -68,72 +118,102 @@
                 </div>
             </section>
 
+            <!-- About section -->
             <section class="about-section card">
                 <h2>About Amazon</h2>
                 <div class="about-content">
                     <p class="description-text">
-                        Amazon is a leading global technology company specializing in e-commerce, cloud computing, digital streaming, and artificial intelligence. 
+                        Amazon is a leading global technology company specializing in e-commerce, cloud computing, digital streaming, and artificial intelligence.
                         <span class="more-text">
-                            Founded in a garage, it has grown to become one of the most influential economic and cultural forces in the world. 
-                            Our mission is to continually innovate and provide unparalleled services and products to our global customer base. 
+                            Founded in a garage, it has grown to become one of the most influential economic and cultural forces in the world.
+                            Our mission is to continually innovate and provide unparalleled services and products to our global customer base.
                             We strive to be Earth's most customer-centric company, where people can find and discover anything they want to buy online.
                         </span>
                     </p>
-                    <button class="read-more-btn">Read More <i class="fas fa-chevron-down"></i></button>
+                    <button class="read-more-btn" type="button">
+                        Read More <i class="fas fa-chevron-down" aria-hidden="true"></i>
+                    </button>
                 </div>
             </section>
 
+            <!-- Key contacts with tabbed interface -->
             <section class="contacts-section card">
                 <h2>Key Contacts</h2>
-                <div class="tabs">
-                    <button class="tab-btn active" data-target="executives">Executives</button>
-                    <button class="tab-btn" data-target="it">IT & Engineering</button>
-                    <button class="tab-btn" data-target="marketing">Marketing</button>
+
+                <!-- Tabs: accessible roles and ARIA attributes added without changing JS behavior -->
+                <div class="tabs" role="tablist" aria-label="Contact departments">
+                    <button class="tab-btn active"
+                            type="button"
+                            role="tab"
+                            data-target="executives"
+                            aria-controls="executives"
+                            aria-selected="true"
+                            id="tab-executives">Executives</button>
+                    <button class="tab-btn"
+                            type="button"
+                            role="tab"
+                            data-target="it"
+                            aria-controls="it"
+                            aria-selected="false"
+                            id="tab-it">IT & Engineering</button>
+                    <button class="tab-btn"
+                            type="button"
+                            role="tab"
+                            data-target="marketing"
+                            aria-controls="marketing"
+                            aria-selected="false"
+                            id="tab-marketing">Marketing</button>
                 </div>
-                
-                <div class="tab-content active" id="executives">
-                    <div class="contact-card">
+
+                <!-- Tab panel: Executives -->
+                <div class="tab-content active" id="executives" role="tabpanel" aria-labelledby="tab-executives">
+                    <article class="contact-card">
                         <div class="contact-avatar">JS</div>
                         <div class="contact-info">
                             <h3>Jane Smith</h3>
                             <p>Chief Executive Officer (CEO)</p>
                             <a href="#" class="view-contact">View Email & Phone</a>
                         </div>
-                    </div>
-                    <div class="contact-card">
+                    </article>
+                    <article class="contact-card">
                         <div class="contact-avatar">JD</div>
                         <div class="contact-info">
                             <h3>John Doe</h3>
                             <p>Chief Financial Officer (CFO)</p>
                             <a href="#" class="view-contact">View Email & Phone</a>
                         </div>
-                    </div>
+                    </article>
                 </div>
-                <div class="tab-content" id="it">
-                    <div class="contact-card">
+
+                <!-- Tab panel: IT & Engineering -->
+                <div class="tab-content" id="it" role="tabpanel" aria-labelledby="tab-it" hidden>
+                    <article class="contact-card">
                         <div class="contact-avatar">MK</div>
                         <div class="contact-info">
                             <h3>Mike Kowalski</h3>
                             <p>VP of Engineering</p>
                             <a href="#" class="view-contact">View Email & Phone</a>
                         </div>
-                    </div>
+                    </article>
                 </div>
-                <div class="tab-content" id="marketing">
-                    <div class="contact-card">
+
+                <!-- Tab panel: Marketing -->
+                <div class="tab-content" id="marketing" role="tabpanel" aria-labelledby="tab-marketing" hidden>
+                    <article class="contact-card">
                         <div class="contact-avatar">AL</div>
                         <div class="contact-info">
                             <h3>Anna Lee</h3>
                             <p>Chief Marketing Officer</p>
                             <a href="#" class="view-contact">View Email & Phone</a>
                         </div>
-                    </div>
+                    </article>
                 </div>
             </section>
 
+            <!-- Technology tags -->
             <section class="tech-stack-section card">
                 <h2>Technologies Used</h2>
-                <div class="tech-tags">
+                <div class="tech-tags" aria-label="Technology stack">
                     <span class="tech-tag">AWS</span>
                     <span class="tech-tag">React</span>
                     <span class="tech-tag">Node.js</span>
@@ -149,17 +229,19 @@
         <!-- Sidebar (Right Column) -->
         <aside class="sidebar">
             <div class="sticky-sidebar">
+
+                <!-- Contact details card -->
                 <section class="contact-details card">
                     <h2>Contact Info</h2>
                     <div class="contact-item">
-                        <i class="fas fa-phone"></i>
+                        <i class="fas fa-phone" aria-hidden="true"></i>
                         <div>
                             <strong>Main Phone</strong>
                             <p>(206) 266-1000</p>
                         </div>
                     </div>
                     <div class="contact-item">
-                        <i class="fas fa-map-marker-alt"></i>
+                        <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
                         <div>
                             <strong>Headquarters</strong>
                             <p>410 Terry Ave N<br>Seattle, Washington 98109<br>United States</p>
@@ -167,6 +249,7 @@
                     </div>
                 </section>
 
+                <!-- Company attributes card -->
                 <section class="company-attributes card">
                     <h2>Company Details</h2>
                     <ul class="attribute-list">
@@ -176,19 +259,31 @@
                         <li><strong>NAICS Code:</strong> 454110</li>
                     </ul>
                 </section>
-                
+
+                <!-- Similar companies card -->
                 <section class="similar-companies card">
                     <h2>Similar Companies</h2>
                     <ul class="similar-list">
                         <li>
-                            <img src="https://via.placeholder.com/30" alt="Logo">
+                            <!-- Performance: lazy-load below-the-fold images and declare explicit dimensions -->
+                            <img src="https://via.placeholder.com/30"
+                                 alt="CloudNet logo"
+                                 width="30"
+                                 height="30"
+                                 loading="lazy"
+                                 decoding="async">
                             <div class="similar-info">
                                 <a href="#">CloudNet</a>
                                 <span>Software • $1B Rev</span>
                             </div>
                         </li>
                         <li>
-                            <img src="https://via.placeholder.com/30" alt="Logo">
+                            <img src="https://via.placeholder.com/30"
+                                 alt="DataStream AI logo"
+                                 width="30"
+                                 height="30"
+                                 loading="lazy"
+                                 decoding="async">
                             <div class="similar-info">
                                 <a href="#">DataStream AI</a>
                                 <span>Software • $800M Rev</span>
@@ -196,15 +291,36 @@
                         </li>
                     </ul>
                 </section>
+
             </div>
         </aside>
     </main>
 
+    <!-- Site footer -->
     <footer class="site-footer">
         <div class="container">
             <p>&copy; 2026 ZoomInfoClone AI Profile Builder. All rights reserved.</p>
         </div>
     </footer>
-    <script src="script.js"></script>
+
+    <!--
+        Security: replace inline onerror handlers with a single event-delegation-style listener.
+        When a logo fails to load, it falls back to the URL stored in data-fallback-src.
+        This script is intentionally minimal and runs after the DOM is parsed.
+    -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Apply fallback images for any image that declares a data-fallback-src
+            document.querySelectorAll('img[data-fallback-src]').forEach(function (img) {
+                img.addEventListener('error', function () {
+                    var fallback = img.getAttribute('data-fallback-src');
+                    // Prevent an infinite loop if the fallback itself fails
+                    if (fallback && img.src !== fallback) {
+                        img.src = fallback;
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>
