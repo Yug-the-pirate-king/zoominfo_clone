@@ -3,20 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Company profile clone for Amazon with key contacts, technologies, and company details.">
     <title>Company Profile Clone</title>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preconnect" href="https://logo.clearbit.com">
+    <link rel="preconnect" href="https://via.placeholder.com">
     <link rel="stylesheet" href="styles.css">
-    <!-- Using Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
     <header class="site-header">
         <div class="container">
             <div class="logo">ZoomInfoClone</div>
-            <div class="search-bar">
-                <input type="text" placeholder="Search for companies, contacts, etc.">
-                <button><i class="fas fa-search"></i></button>
-            </div>
-            <nav class="header-nav">
+            <form class="search-bar" role="search" action="/search" method="get" novalidate>
+                <label for="site-search" class="visually-hidden">Search for companies, contacts, etc.</label>
+                <input
+                    id="site-search"
+                    type="search"
+                    name="q"
+                    placeholder="Search for companies, contacts, etc."
+                    required
+                    minlength="1"
+                    maxlength="255"
+                    autocomplete="off"
+                    aria-label="Search for companies, contacts, etc."
+                >
+                <button type="submit" aria-label="Submit search"><i class="fas fa-search" aria-hidden="true"></i></button>
+            </form>
+            <nav class="header-nav" aria-label="Main navigation">
                 <a href="#">Products</a>
                 <a href="#">Solutions</a>
                 <a href="#">Pricing</a>
@@ -25,26 +41,36 @@
         </div>
     </header>
 
-    <div class="breadcrumbs container">
-        <a href="#">Home</a> > <a href="#">Companies</a> > <span>Amazon</span>
+    <div class="breadcrumbs container" role="navigation" aria-label="Breadcrumb">
+        <a href="#">Home</a>
+        <span aria-hidden="true"> &gt; </span>
+        <a href="#">Companies</a>
+        <span aria-hidden="true"> &gt; </span>
+        <span aria-current="page">Amazon</span>
     </div>
 
-    <main class="container page-content">
-        <!-- Main Content (Left Column) -->
+    <main id="main-content" class="container page-content">
         <div class="main-column">
-            
             <section class="hero-section card">
                 <div class="hero-header">
                     <div class="company-logo-large">
-                        <img src="https://logo.clearbit.com/amazon.com" alt="Amazon Logo" onerror="this.src='https://via.placeholder.com/100'">
+                        <img
+                            src="https://logo.clearbit.com/amazon.com"
+                            alt="Amazon Logo"
+                            width="100"
+                            height="100"
+                            loading="eager"
+                            decoding="async"
+                            onerror="if(this.src !== 'https://via.placeholder.com/100') { this.src='https://via.placeholder.com/100'; } else { this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22%3E%3Crect width=%22100%25%22 height=%22100%25%22 fill=%22%23eeeeee%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-size=%2214%22 fill=%22%23666666%22%3ELogo%3C/text%3E%3C/svg%3E'; }"
+                        >
                     </div>
                     <div class="company-title-area">
                         <h1>Amazon</h1>
-                        <a href="https://www.amazon.com" class="company-website" target="_blank"><i class="fas fa-link"></i> www.amazon.com</a>
-                        <div class="social-links">
-                            <a href="#"><i class="fab fa-linkedin"></i></a>
-                            <a href="#"><i class="fab fa-twitter"></i></a>
-                            <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="https://www.amazon.com" class="company-website" target="_blank" rel="noopener noreferrer" aria-label="Visit Amazon website (opens in new tab)"><i class="fas fa-link" aria-hidden="true"></i> www.amazon.com</a>
+                        <div class="social-links" aria-label="Social media links">
+                            <a href="#" aria-label="Amazon on LinkedIn"><i class="fab fa-linkedin" aria-hidden="true"></i></a>
+                            <a href="#" aria-label="Amazon on Twitter"><i class="fab fa-twitter" aria-hidden="true"></i></a>
+                            <a href="#" aria-label="Amazon on Facebook"><i class="fab fa-facebook" aria-hidden="true"></i></a>
                         </div>
                     </div>
                 </div>
@@ -72,28 +98,28 @@
                 <h2>About Amazon</h2>
                 <div class="about-content">
                     <p class="description-text">
-                        Amazon is a leading global technology company specializing in e-commerce, cloud computing, digital streaming, and artificial intelligence. 
-                        <span class="more-text">
-                            Founded in a garage, it has grown to become one of the most influential economic and cultural forces in the world. 
-                            Our mission is to continually innovate and provide unparalleled services and products to our global customer base. 
+                        Amazon is a leading global technology company specializing in e-commerce, cloud computing, digital streaming, and artificial intelligence.
+                        <span class="more-text" id="about-more">
+                            Founded in a garage, it has grown to become one of the most influential economic and cultural forces in the world.
+                            Our mission is to continually innovate and provide unparalleled services and products to our global customer base.
                             We strive to be Earth's most customer-centric company, where people can find and discover anything they want to buy online.
                         </span>
                     </p>
-                    <button class="read-more-btn">Read More <i class="fas fa-chevron-down"></i></button>
+                    <button class="read-more-btn" aria-expanded="false" aria-controls="about-more">Read More <i class="fas fa-chevron-down" aria-hidden="true"></i></button>
                 </div>
             </section>
 
             <section class="contacts-section card">
                 <h2>Key Contacts</h2>
-                <div class="tabs">
-                    <button class="tab-btn active" data-target="executives">Executives</button>
-                    <button class="tab-btn" data-target="it">IT & Engineering</button>
-                    <button class="tab-btn" data-target="marketing">Marketing</button>
+                <div class="tabs" role="tablist" aria-label="Key contact categories">
+                    <button class="tab-btn active" role="tab" aria-selected="true" aria-controls="executives" id="tab-executives" data-target="executives">Executives</button>
+                    <button class="tab-btn" role="tab" aria-selected="false" aria-controls="it" id="tab-it" data-target="it">IT & Engineering</button>
+                    <button class="tab-btn" role="tab" aria-selected="false" aria-controls="marketing" id="tab-marketing" data-target="marketing">Marketing</button>
                 </div>
-                
-                <div class="tab-content active" id="executives">
+
+                <div class="tab-content active" id="executives" role="tabpanel" aria-labelledby="tab-executives">
                     <div class="contact-card">
-                        <div class="contact-avatar">JS</div>
+                        <div class="contact-avatar" role="img" aria-label="Jane Smith initials">JS</div>
                         <div class="contact-info">
                             <h3>Jane Smith</h3>
                             <p>Chief Executive Officer (CEO)</p>
@@ -101,7 +127,7 @@
                         </div>
                     </div>
                     <div class="contact-card">
-                        <div class="contact-avatar">JD</div>
+                        <div class="contact-avatar" role="img" aria-label="John Doe initials">JD</div>
                         <div class="contact-info">
                             <h3>John Doe</h3>
                             <p>Chief Financial Officer (CFO)</p>
@@ -109,9 +135,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="tab-content" id="it">
+                <div class="tab-content" id="it" role="tabpanel" aria-labelledby="tab-it" hidden>
                     <div class="contact-card">
-                        <div class="contact-avatar">MK</div>
+                        <div class="contact-avatar" role="img" aria-label="Mike Kowalski initials">MK</div>
                         <div class="contact-info">
                             <h3>Mike Kowalski</h3>
                             <p>VP of Engineering</p>
@@ -119,9 +145,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="tab-content" id="marketing">
+                <div class="tab-content" id="marketing" role="tabpanel" aria-labelledby="tab-marketing" hidden>
                     <div class="contact-card">
-                        <div class="contact-avatar">AL</div>
+                        <div class="contact-avatar" role="img" aria-label="Anna Lee initials">AL</div>
                         <div class="contact-info">
                             <h3>Anna Lee</h3>
                             <p>Chief Marketing Officer</p>
@@ -143,26 +169,24 @@
                     <span class="tech-tag">MySQL</span>
                 </div>
             </section>
-
         </div>
 
-        <!-- Sidebar (Right Column) -->
         <aside class="sidebar">
             <div class="sticky-sidebar">
                 <section class="contact-details card">
                     <h2>Contact Info</h2>
                     <div class="contact-item">
-                        <i class="fas fa-phone"></i>
+                        <i class="fas fa-phone" aria-hidden="true"></i>
                         <div>
                             <strong>Main Phone</strong>
-                            <p>(206) 266-1000</p>
+                            <p><a href="tel:+12062661000">(206) 266-1000</a></p>
                         </div>
                     </div>
                     <div class="contact-item">
-                        <i class="fas fa-map-marker-alt"></i>
+                        <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
                         <div>
                             <strong>Headquarters</strong>
-                            <p>410 Terry Ave N<br>Seattle, Washington 98109<br>United States</p>
+                            <address>410 Terry Ave N<br>Seattle, Washington 98109<br>United States</address>
                         </div>
                     </div>
                 </section>
@@ -176,19 +200,35 @@
                         <li><strong>NAICS Code:</strong> 454110</li>
                     </ul>
                 </section>
-                
+
                 <section class="similar-companies card">
                     <h2>Similar Companies</h2>
                     <ul class="similar-list">
                         <li>
-                            <img src="https://via.placeholder.com/30" alt="Logo">
+                            <img
+                                src="https://via.placeholder.com/30"
+                                alt="CloudNet logo"
+                                width="30"
+                                height="30"
+                                loading="lazy"
+                                decoding="async"
+                                onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2230%22 height=%2230%22%3E%3Crect width=%22100%25%22 height=%22100%25%22 fill=%22%23eeeeee%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-size=%2210%22 fill=%22%23666666%22%3ECN%3C/text%3E%3C/svg%3E';"
+                            >
                             <div class="similar-info">
                                 <a href="#">CloudNet</a>
                                 <span>Software • $1B Rev</span>
                             </div>
                         </li>
                         <li>
-                            <img src="https://via.placeholder.com/30" alt="Logo">
+                            <img
+                                src="https://via.placeholder.com/30"
+                                alt="DataStream AI logo"
+                                width="30"
+                                height="30"
+                                loading="lazy"
+                                decoding="async"
+                                onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2230%22 height=%2230%22%3E%3Crect width=%22100%25%22 height=%22100%25%22 fill=%22%23eeeeee%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-size=%2210%22 fill=%22%23666666%22%3EDS%3C/text%3E%3C/svg%3E';"
+                            >
                             <div class="similar-info">
                                 <a href="#">DataStream AI</a>
                                 <span>Software • $800M Rev</span>
@@ -205,6 +245,7 @@
             <p>&copy; 2026 ZoomInfoClone AI Profile Builder. All rights reserved.</p>
         </div>
     </footer>
-    <script src="script.js"></script>
+
+    <script src="script.js" defer></script>
 </body>
 </html>
