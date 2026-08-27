@@ -3,19 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
     <title>Company Profile Clone</title>
     <link rel="stylesheet" href="styles.css">
     <!-- Using Font Awesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer">
 </head>
 <body>
     <header class="site-header">
         <div class="container">
             <div class="logo">ZoomInfoClone</div>
-            <div class="search-bar">
-                <input type="text" placeholder="Search for companies, contacts, etc.">
-                <button><i class="fas fa-search"></i></button>
-            </div>
+            <form class="search-bar" id="search-form" role="search" action="#" method="get">
+                <input id="search-input" type="search" name="q" placeholder="Search for companies, contacts, etc." minlength="1" maxlength="200" aria-label="Search" aria-describedby="search-error" aria-invalid="false" autocomplete="off" required>
+                <button type="submit" aria-label="Submit search"><i class="fas fa-search"></i></button>
+            </form>
             <nav class="header-nav">
                 <a href="#">Products</a>
                 <a href="#">Solutions</a>
@@ -25,9 +26,10 @@
         </div>
     </header>
 
-    <div class="breadcrumbs container">
-        <a href="#">Home</a> > <a href="#">Companies</a> > <span>Amazon</span>
+    <div class="breadcrumbs container" aria-label="Breadcrumb">
+        <a href="#">Home</a> <span aria-hidden="true">&gt;</span> <a href="#">Companies</a> <span aria-hidden="true">&gt;</span> <span aria-current="page">Amazon</span>
     </div>
+    <p id="search-error" class="search-error container" role="alert" aria-live="polite"></p>
 
     <main class="container page-content">
         <!-- Main Content (Left Column) -->
@@ -36,15 +38,15 @@
             <section class="hero-section card">
                 <div class="hero-header">
                     <div class="company-logo-large">
-                        <img src="https://logo.clearbit.com/amazon.com" alt="Amazon Logo" onerror="this.src='https://via.placeholder.com/100'">
+                        <img id="company-logo" src="https://logo.clearbit.com/amazon.com" alt="Amazon Logo" data-fallback="https://via.placeholder.com/100" referrerpolicy="no-referrer">
                     </div>
                     <div class="company-title-area">
                         <h1>Amazon</h1>
-                        <a href="https://www.amazon.com" class="company-website" target="_blank"><i class="fas fa-link"></i> www.amazon.com</a>
+                        <a href="https://www.amazon.com" class="company-website" target="_blank" rel="noopener noreferrer"><i class="fas fa-link"></i> www.amazon.com</a>
                         <div class="social-links">
-                            <a href="#"><i class="fab fa-linkedin"></i></a>
-                            <a href="#"><i class="fab fa-twitter"></i></a>
-                            <a href="#"><i class="fab fa-facebook"></i></a>
+                            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                            <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
                         </div>
                     </div>
                 </div>
@@ -181,14 +183,14 @@
                     <h2>Similar Companies</h2>
                     <ul class="similar-list">
                         <li>
-                            <img src="https://via.placeholder.com/30" alt="Logo">
+                            <img src="https://via.placeholder.com/30" alt="CloudNet logo" loading="lazy">
                             <div class="similar-info">
                                 <a href="#">CloudNet</a>
                                 <span>Software • $1B Rev</span>
                             </div>
                         </li>
                         <li>
-                            <img src="https://via.placeholder.com/30" alt="Logo">
+                            <img src="https://via.placeholder.com/30" alt="DataStream AI logo" loading="lazy">
                             <div class="similar-info">
                                 <a href="#">DataStream AI</a>
                                 <span>Software • $800M Rev</span>
@@ -205,6 +207,71 @@
             <p>&copy; 2026 ZoomInfoClone AI Profile Builder. All rights reserved.</p>
         </div>
     </footer>
+    <script>
+        (function () {
+            'use strict';
+
+            var logo = document.getElementById('company-logo');
+            if (logo) {
+                logo.addEventListener('error', function () {
+                    var fallback = logo.getAttribute('data-fallback');
+                    if (fallback && logo.src !== fallback) {
+                        logo.src = fallback;
+                    }
+                });
+            }
+
+            var searchForm = document.getElementById('search-form');
+            var searchInput = document.getElementById('search-input');
+            var searchError = document.getElementById('search-error');
+
+            function escapeHtml(text) {
+                return text.replace(/[&<>"']/g, function (ch) {
+                    return ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[ch];
+                });
+            }
+
+            if (searchForm && searchInput && searchError) {
+                searchForm.addEventListener('submit', function (event) {
+                    event.preventDefault();
+                    searchError.textContent = '';
+                    searchInput.setAttribute('aria-invalid', 'false');
+
+                    var value = searchInput.value.trim();
+
+                    if (!value) {
+                        searchError.textContent = 'Please enter a search term.';
+                        searchInput.setAttribute('aria-invalid', 'true');
+                        searchInput.focus();
+                        return;
+                    }
+
+                    if (value.length > 200) {
+                        searchError.textContent = 'Search term must be 200 characters or fewer.';
+                        searchInput.setAttribute('aria-invalid', 'true');
+                        searchInput.focus();
+                        return;
+                    }
+
+                    if (!/^[\p{L}\p{N}\s\-.,&]+$/u.test(value)) {
+                        searchError.textContent = 'Search term contains invalid characters.';
+                        searchInput.setAttribute('aria-invalid', 'true');
+                        searchInput.focus();
+                        return;
+                    }
+
+                    escapeHtml(value);
+                });
+
+                searchInput.addEventListener('input', function () {
+                    if (searchError.textContent) {
+                        searchError.textContent = '';
+                        searchInput.setAttribute('aria-invalid', 'false');
+                    }
+                });
+            }
+        })();
+    </script>
     <script src="script.js"></script>
 </body>
 </html>
