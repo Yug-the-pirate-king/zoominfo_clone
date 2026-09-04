@@ -1,35 +1,32 @@
 document.addEventListener("DOMContentLoaded", () => {
-    // Read More functionality
-    const readMoreBtn = document.querySelector('.read-more-btn');
+    const readMoreButton = document.querySelector('.read-more-btn');
     const aboutContent = document.querySelector('.about-content');
 
-    if (readMoreBtn && aboutContent) {
-        readMoreBtn.addEventListener('click', () => {
-            aboutContent.classList.toggle('expanded');
-            if (aboutContent.classList.contains('expanded')) {
-                readMoreBtn.innerHTML = 'Read Less <i class="fas fa-chevron-up"></i>';
-            } else {
-                readMoreBtn.innerHTML = 'Read More <i class="fas fa-chevron-down"></i>';
-            }
+    if (readMoreButton && aboutContent) {
+        readMoreButton.addEventListener('click', () => {
+            const isExpanded = aboutContent.classList.toggle('expanded');
+            const buttonText = isExpanded ? 'Read Less' : 'Read More';
+            const chevronIcon = isExpanded ? 'chevron-up' : 'chevron-down';
+            readMoreButton.innerHTML = `${buttonText} <i class="fas fa-${chevronIcon}"></i>`;
         });
     }
 
-    // Tabs functionality
-    const tabBtns = document.querySelectorAll('.tab-btn');
+    const tabButtons = document.querySelectorAll('.tab-btn');
+    if (tabButtons.length === 0) return;
+
     const tabContents = document.querySelectorAll('.tab-content');
 
-    tabBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            // Remove active class from all buttons and contents
-            tabBtns.forEach(b => b.classList.remove('active'));
-            tabContents.forEach(c => c.classList.remove('active'));
+    tabButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const activeButton = document.querySelector('.tab-btn.active');
+            const activeContent = document.querySelector('.tab-content.active');
 
-            // Add active class to clicked button
-            btn.classList.add('active');
+            if (activeButton) activeButton.classList.remove('active');
+            if (activeContent) activeContent.classList.remove('active');
 
-            // Show corresponding content
-            const targetId = btn.getAttribute('data-target');
-            const targetContent = document.getElementById(targetId);
+            button.classList.add('active');
+
+            const targetContent = document.getElementById(button.dataset.target);
             if (targetContent) {
                 targetContent.classList.add('active');
             }
