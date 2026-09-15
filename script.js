@@ -1,38 +1,54 @@
 document.addEventListener("DOMContentLoaded", () => {
-    // Read More functionality
-    const readMoreBtn = document.querySelector('.read-more-btn');
-    const aboutContent = document.querySelector('.about-content');
+    "use strict";
 
-    if (readMoreBtn && aboutContent) {
-        readMoreBtn.addEventListener('click', () => {
-            aboutContent.classList.toggle('expanded');
-            if (aboutContent.classList.contains('expanded')) {
-                readMoreBtn.innerHTML = 'Read Less <i class="fas fa-chevron-up"></i>';
-            } else {
-                readMoreBtn.innerHTML = 'Read More <i class="fas fa-chevron-down"></i>';
-            }
+    // --- Read More / Read Less toggle ---
+    const readMoreButton = document.querySelector(".read-more-btn");
+    const aboutSection = document.querySelector(".about-content");
+
+    if (readMoreButton && aboutSection) {
+        readMoreButton.addEventListener("click", () => {
+            // classList.toggle returns true when the class is added
+            const isExpanded = aboutSection.classList.toggle("expanded");
+
+            readMoreButton.innerHTML = isExpanded
+                ? 'Read Less <i class="fas fa-chevron-up"></i>'
+                : 'Read More <i class="fas fa-chevron-down"></i>';
         });
     }
 
-    // Tabs functionality
-    const tabBtns = document.querySelectorAll('.tab-btn');
-    const tabContents = document.querySelectorAll('.tab-content');
+    // --- Tab switching ---
+    const tabButtons = document.querySelectorAll(".tab-btn");
+    const tabPanels = document.querySelectorAll(".tab-content");
 
-    tabBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            // Remove active class from all buttons and contents
-            tabBtns.forEach(b => b.classList.remove('active'));
-            tabContents.forEach(c => c.classList.remove('active'));
+    if (tabButtons.length && tabPanels.length) {
+        // Map each tab's target id directly to its panel element for O(1) lookups
+        const panelByTargetId = new Map();
+        tabPanels.forEach((panel) => panelByTargetId.set(panel.id, panel));
 
-            // Add active class to clicked button
-            btn.classList.add('active');
+        // Track the currently active tab so we only touch two elements per click
+        let activeTabButton = document.querySelector(".tab-btn.active");
+        let activeTabPanel = document.querySelector(".tab-content.active");
 
-            // Show corresponding content
-            const targetId = btn.getAttribute('data-target');
-            const targetContent = document.getElementById(targetId);
-            if (targetContent) {
-                targetContent.classList.add('active');
-            }
+        tabButtons.forEach((button) => {
+            button.addEventListener("click", () => {
+                const targetId = button.dataset.target;
+                const targetPanel = panelByTargetId.get(targetId);
+
+                // Ignore clicks that don't match a real panel
+                if (!targetPanel) return;
+
+                // Deactivate the previous tab button and panel
+                if (activeTabButton) activeTabButton.classList.remove("active");
+                if (activeTabPanel) activeTabPanel.classList.remove("active");
+
+                // Activate the clicked tab button and its corresponding panel
+                button.classList.add("active");
+                targetPanel.classList.add("active");
+
+                // Update active references for the next switch
+                activeTabButton = button;
+                activeTabPanel = targetPanel;
+            });
         });
-    });
+    }
 });
